@@ -1,5 +1,4 @@
 # DailyPlanner
-Simple, easy to use and efficient daily planner.
 
 # Objective
 - To gain more practical experience with HTML, CSS, and Javascript
