@@ -10,7 +10,7 @@
 * Ability to add, update, and delete daily plan
 
 # Technologies used
-* HTML5
+* HTML5 (localStorage)
 * CSS
 * Javascript
-* Moment.js
+* Bootstrap
