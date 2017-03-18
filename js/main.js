@@ -39,7 +39,7 @@ $(document).ready(function() {
 				tasks = [];
 			}
 
-			// Take all value passed down from form.submit and 
+			// Take all value passed down from form.submit and assigned into a newTask object
 			var newTask = {
 				'id' : id,
 				'task' : task,
@@ -47,7 +47,6 @@ $(document).ready(function() {
 				'taskDate' : taskDate,
 				'taskTime' : taskTime
 			}
-			// put them in a newTask object
 			tasks.push(newTask);
 
 			// now it's ready to store added tasks into the localStorage object
@@ -90,7 +89,14 @@ $(document).ready(function() {
 	function sortByTime(a, b) {
 		var aTime = a.task_time;
 		var bTime = b.task_time;
-		// tenary operator
+		
+		/************************************************************/
+		/******* tenary operator, alternative to if statement *******/
+		/************************************************************/
+
+		// (First condition) if aTime is less than bTime then put aTime upfront (-1 doing this), or
+		// (Second condition) if aTime is bigger than bTime then still put aTime upfront (1 doing this), or
+		// (Third condition) if aTime and bTime are the same, leave them as it is (0 doing this)
 		return ((aTime < bTime) ? -1 : ((aTime > bTime) ? 1 : 0));
 	}
 
