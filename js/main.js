@@ -4,12 +4,9 @@ $(document).ready(function() {
 		addTask(e);
 	});
 
-
-
 	// Function adding task
 	function addTask(e) {
 
-		// localStorage.removeItem('tasks');
 		// Add unique id
 		var newDate = new Date();
 		var id = newDate.getTime();
@@ -43,7 +40,6 @@ $(document).ready(function() {
 			}
 
 			// Take all value passed down from form.submit and 
-			// put them in a newTask object
 			var newTask = {
 				'id' : id,
 				'task' : task,
@@ -51,7 +47,7 @@ $(document).ready(function() {
 				'taskDate' : taskDate,
 				'taskTime' : taskTime
 			}
-
+			// put them in a newTask object
 			tasks.push(newTask);
 
 			// now it's ready to store added tasks into the localStorage object
@@ -60,6 +56,44 @@ $(document).ready(function() {
 			localStorage.setItem('tasks', JSON.stringify(tasks));
 		}
 	}
+
+	// Function to display task
+	function displayTasks() {
+
+		// Grab tasks passed down from function addTask()
+		var tasksToDisplay = JSON.parse(localStorage.getItem('tasks'));
+
+		if (tasksToDisplay != null) {
+			// Call array.sort(callback) function 
+			tasksToDisplay = tasksToDisplay.sort(sortByTime);
+		}
+
+		// Set counter
+		var i = 0;
+		// Check tasks
+		if(localStorage.getItem('tasks') != null) {
+			// Loop through using jQuery.each method then display using append()
+			$.each(tasksToDisplay, function(key, value) {
+				$('#task-table').append(
+					'<tr id="' + value.id + '">' +
+					'<td>' + value.task + '</td>' +
+					'<td>' + value.taskPriority + '</td>' +
+					'<td>' + value.taskDate + '</td>' +
+					'<td>' + value.taskTime + '</td>' +
+					'<td><a href="edit.html?id='+ value.id +'">Edit</a> | <a hret="#" id="remove-task">Remove</td>' +
+					'</tr>');
+			})
+		}
+	}
+
+	// sortByTime function
+	function sortByTime(a, b) {
+		var aTime = a.task_time;
+		var bTime = b.task_time;
+		// tenary operator
+		return ((aTime < bTime) ? -1 : ((aTime > bTime) ? 1 : 0));
+	}
+
+	displayTasks();
+
 });
-
-
